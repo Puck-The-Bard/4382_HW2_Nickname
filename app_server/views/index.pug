@@ -1,0 +1,64 @@
+extends layout
+
+block content
+
+  - let words = ["one", "two", "three"];
+  // below is a block-level unbuffered code block - https://github.com/pugjs/pug/issues/502#issuecomment-137893041
+  -
+    let negative_traits = [
+      "aloof","apathetic","callous","cheerless","closed","cold","combative","conceited",
+      "constricting","controlling","cowering","dependent","dishonest","distant","fearful",
+      "fleeting","gloomy","grumpy","guarded","hostile","immature","impolite","impractical",
+      "inconsiderate","indecisive","indecisive","indifferent","indulgent","insecure",
+      "insincere","intolerant","jealous","lazy","mean","mistrusting","naïve","ostentatious",
+      "pessimistic","petty","resentful","rigid","rude","scattered","secretive","selfish",
+      "self-satisfied","sour","stubborn","tardy","thoughtless","uncaring","uncommitted",
+      "uncooperative","unenthusiastic","unfeeling","ungrateful","unhelpful","unmotivated",
+      "unreceptive","unreliable","unsympathetic","vain","wasteful",
+    ];
+  
+  - 
+    let positive_traits = [
+      "affectionate","agile","ambitious","aspiring","candid","caring","cheerful","considerate",
+      "cooperative","courageous","courteous","decisive","determined","devoted","enthusiastic",
+      "expansive","faithful","flexible","focused","forgiving","friendly","generous","goodwill",
+      "grateful","honest","humble","interested","involved","kind","mature","modest","motivated",
+      "optimistic","perfects","persistent","practical","punctual","realistic","reliable","respectful",
+      "responsible","responsive","self-confident","self-directed","self-disciplined","selfless",
+      "self-reliant","sensitive","serious","sincere","sympathetic","systematic","thoughtful",
+      "thrifty","trusting","unpretentious","unselfish",
+    ];
+
+  div.container
+    div.jumbotron.jumbotron-fluid
+      h1= title
+      p Welcome to #{title}
+      a(href="http://localhost:3000") Home
+  
+  div.container
+    div.row
+      h2.col-3 Name Entry
+  div.container
+    form(method="POST" action="")
+      div.form-group.col-md-3
+        label(for='fname') First Name:
+        input#fname.form-control(type="text", placeholder="Type first name here..." name='fname')
+      div.form-group.col-md-3
+        label(for='lname') Last Name:
+        input#lname.form-control(type="text", placeholder="Type last name here..." name='lname')
+      div.form-group.col-md-3
+        label(for='ptraits') Positive Traits:
+        select#ptraits.form-contol(name="ptraits")
+          each trait in positive_traits
+            option= trait
+      div.form-group.col-md-3
+        label(for='ntraits') Negative Traits:
+        select#ntraits.form-contol(name="ntraits")
+          each trait in negative_traits
+            option= trait
+      button.btn.btn-outline-primary(type='submit') Submit
+      
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
