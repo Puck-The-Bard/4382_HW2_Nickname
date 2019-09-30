@@ -30,10 +30,10 @@ const nickname = (req, res) => {
         //get response text
         // let synonyms = response.data.adjective.syn;
         // randsyn = synonyms[Math.floor(Math.random() * synonyms.length)];
-        randpsyn = getsyn(responses[0].data.adjective.ant); //no other combination will work for some reason responses[0].data.adjective.syn is the only one that returns a value.  all others time out
+        randpsyn = getsyn(responses[0].data.adjective.sim); //no other combination will work for some reason responses[0].data.adjective.syn is the only one that returns a value.  all others time out
         console.log(req.body.fname + ", the " + randpsyn.toUpperCase());
 
-        randnsyn = getsyn(responses[1].data.adjective.syn);
+        randnsyn = getsyn(responses[1].data.adjective.sim);
         console.log(req.body.fname + ", the " + randnsyn.toUpperCase());        
 
         res.render('results', { title: "Nickname Results", 
