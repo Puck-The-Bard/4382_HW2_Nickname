@@ -23,14 +23,14 @@ const nickname = (req, res) => {
 
     // https://words.bighugelabs.com/site/api
     axios.all([
-        axios.get("https://words.bighugelabs.com/api/2/" + '9cd9ba274a3ceb74740b5f1c12641651' + "/" + req.body.ptraits + "/json"),
+        axios.get("https://words.bighugelabs.com/api/2/" + '9cd9ba274a3ceb74740b5f1c12641651' + "/" + req.body.ptraits + "/json"),  //tried using an env file but it times out when I try and use it
         axios.get("https://words.bighugelabs.com/api/2/" + '9cd9ba274a3ceb74740b5f1c12641651' + "/" + req.body.ntraits + "/json")
     ]).then((responses) => {
 
         //get response text
         // let synonyms = response.data.adjective.syn;
         // randsyn = synonyms[Math.floor(Math.random() * synonyms.length)];
-        randpsyn = getsyn(responses[0].data.adjective.ant);
+        randpsyn = getsyn(responses[0].data.adjective.ant); //no other combination will work for some reason responses[0].data.adjective.syn is the only one that returns a value.  all others time out
         console.log(req.body.fname + ", the " + randpsyn.toUpperCase());
 
         randnsyn = getsyn(responses[1].data.adjective.syn);
